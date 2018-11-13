@@ -4,8 +4,8 @@
 using MatMath::Matrix;
 using ComplexMath::Complex;
 
-typedef Complex<int> Cplex;
-typedef Matrix<Complex<int>> CplexMat;
+typedef Complex<double> Cplex;
+typedef Matrix<Cplex> CplexMat;
 
 namespace QComputing{
 
