@@ -23,7 +23,7 @@ public:
     inline operator double() const {return ((double) m_numer)/((double) m_denom);}
 
     inline Fraction reduce(){return Fraction(m_numer/MathFunc::gcd(m_numer, m_denom), m_denom/MathFunc::gcd(m_numer, m_denom));}
-    inline std::string display()const{return (std::to_string(m_numer) + "/" + std::to_string(m_denom));}
+    inline std::string str()const{return (std::to_string(m_numer) + "/" + std::to_string(m_denom));}
 
 private:
     int m_numer;
@@ -31,5 +31,5 @@ private:
 };
 
 
-std::string to_string(const Fraction& f) {return f.display();}
+std::string to_string(const Fraction& f) {return f.str();}
 }

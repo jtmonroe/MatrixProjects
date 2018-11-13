@@ -12,6 +12,7 @@ template <class T> class Matrix
 public:
 	// Constructor + Destructor
 	Matrix(int row, int col);
+	Matrix(const Matrix<T>& M);
 	~Matrix();
 
 	// Get row/col numbers
@@ -36,6 +37,7 @@ public:
 		// Matrix Mult and Addition
 	Matrix<T> operator+(const Matrix<T>& M);
 	Matrix<T> operator*(const Matrix<T>& M);
+	bool operator==(const Matrix<T>& M);
 
 		// Tensor Product
 	Matrix<T> tensor(const Matrix<T>& M);
@@ -66,6 +68,14 @@ Matrix<T>::Matrix(int row,int col)
 	m_col = col;
 
 	m_data = new T[row*col];
+}
+
+template <class T>
+Matrix<T>::Matrix(const Matrix<T>& M)
+{
+	m_row = M.m_row;
+	m_col = M.m_col;
+	m_data = M.m_data;
 }
 
 template <class T>
@@ -159,6 +169,17 @@ Matrix<T> Matrix<T>::operator*(const Matrix<T>& M)
 }
 
 template <class T>
+bool Matrix<T>::operator==(const Matrix<T>& M)
+{
+	if (m_row != M.m_row && m_col != M.m_col) return false;
+	for(unsigned int i{0}; i < m_col*m_row; i++)
+	{
+		if (m_data[i] == M.m_data[i]) return false;
+	}
+	return true;
+}
+
+template <class T>
 Matrix<T> Matrix<T>::tensor(const Matrix<T>& M)
 {
 	Matrix<T> result((m_row)*(M.m_row), (m_col)*(M.m_col));
@@ -211,10 +232,11 @@ template <class T>
 Matrix<T> Identity(int n)
 {
 	Matrix<T> I(n,n);
+	T o = 1;
 	for (unsigned int i{0}; i < n; i++)
 	{
 		T ei[n];
-		ei[i] = ei[i] + 1;
+		ei[i] = ei[i] + o;
 		I.setCol(ei,i);
 	}
 	return I;
