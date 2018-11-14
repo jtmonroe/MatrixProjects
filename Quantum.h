@@ -50,6 +50,4 @@ CplexMat sigma_(enum Pauli in)
     }
 }
 
-
-
 }
