@@ -18,6 +18,7 @@ CplexMat ei(int n, int i)
     return e;
 }
 
+
 CplexMat sigma_(enum Pauli in)
 {
     CplexMat result(2,2);

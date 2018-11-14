@@ -1,6 +1,6 @@
 #pragma once
 
-#include<iostream> 
+#include<iostream>
 #include<string>
 
 using std::to_string;
@@ -16,8 +16,8 @@ public:
 	~Matrix();
 
 	// Get row/col numbers
-	inline int getRown(){return this -> m_row;}	 
-	inline int getColn(){return this -> m_col;}	
+	inline int getRown(){return this -> m_row;}
+	inline int getColn(){return this -> m_col;}
 
 	// Getter and Setter functions for Rows, Cols, and Pos
 	T* getCol(int coln) const;
@@ -83,7 +83,7 @@ Matrix<T>::~Matrix()
 {
 	if ((m_row == 0) || (m_col == 0)) { delete m_data;}
 	else { delete [] m_data; }
-	m_data = NULL;	
+	m_data = NULL;
 }
 
 template <class T>
@@ -216,9 +216,9 @@ Matrix<T> Matrix<T>::transpose()
 template <class T>
 void Matrix<T>::display()
 {
-	for (int i{ 0 }; i < m_row; i++) 
+	for (int i{ 0 }; i < m_row; i++)
 	{
-		for (int j{ 0 }; j < m_col; j++) 
+		for (int j{ 0 }; j < m_col; j++)
 		{
 			std::cout << to_string(m_data[i*m_col + j]) << ", ";
 		}

@@ -13,7 +13,7 @@ using namespace QComputing;
 template <class T> void print(T out);
 
 int main()
-{	
+{
 	//Prepare Bits
 	CplexMat e00 = ei(2,0).tensor(ei(2,0));
 	CplexMat e01 = ei(2,0).tensor(ei(2,1));
