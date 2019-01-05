@@ -1,5 +1,7 @@
 #include "Matrix.h"
 #include "Complex.h"
+#include "math.h"
+
 
 using MatMath::Matrix;
 using ComplexMath::Complex;
@@ -7,48 +9,61 @@ using ComplexMath::Complex;
 typedef Complex<double> Cplex;
 typedef Matrix<Cplex> CplexMat;
 
-namespace QComputing{
+namespace QComputing {
 
-enum class Pauli{ I, X, Y, Z };
+	enum class Pauli { I, H, X, Y, Z };
 
-CplexMat ei(int n, int i)
-{
-    CplexMat e(n, 1);
-    e.setPos(i, 0, Cplex(1, 0));
-    return e;
-}
+	CplexMat ei(int n, int i)
+	{
+		CplexMat e(n, 1);
+		e.setPos(i, 0, Cplex(1, 0));
+		return e;
+	}
 
 
-CplexMat sigma_(enum Pauli in)
-{
-    CplexMat result(2,2);
-    switch (in)
-    {
-        case Pauli::I: { Cplex c0[2] = {Cplex(1, 0), Cplex(0, 0)};
-                         Cplex c1[2] = {Cplex(0, 0), Cplex(1, 0)};
-                         result.setCol(c0,0);
-                         result.setCol(c1,1);
-                         //result.display();                    
-                         return result; } 
-        case Pauli::X: { Cplex c0[2] = {Cplex(0, 0), Cplex(1, 0)};
-                         Cplex c1[2] = {Cplex(1, 0), Cplex(0, 0)};
-                         result.setCol(c0,0);
-                         result.setCol(c1,1);
-                         //result.display();                    
-                         return result; }
-        case Pauli::Y: { Cplex c0[2] = {Cplex(0, 0), Cplex(0, -1)};
-                         Cplex c1[2] = {Cplex(0, 1), Cplex(0, 0)};
-                         result.setCol(c0,0);
-                         result.setCol(c1,1);
-                         //result.display();
-                         return result; }
-        case Pauli::Z: { Cplex c0[2] = {Cplex(1, 0), Cplex(0, 0)};
-                         Cplex c1[2] = {Cplex(0, 0), Cplex(-1, 0)};
-                         result.setCol(c0,0);
-                         result.setCol(c1,1);
-                         //result.display();
-                         return result; }
-    }
-}
+	CplexMat sigma_(enum Pauli in)
+	{
+		CplexMat result(2, 2);
+		switch (in)
+		{
+		case Pauli::I: { Cplex c0[2] = { Cplex(1, 0), Cplex(0, 0) };
+					   Cplex c1[2] = { Cplex(0, 0), Cplex(1, 0) };
+					   result.setCol(c0, 0);
+					   result.setCol(c1, 1);
+					   result.display();
+					   return result; }
+		case Pauli::H: { double i = (1 / std::sqrt(2));
+			Cplex c0[2] = { Cplex(i, 0), Cplex(i, 0) };
+			Cplex c1[2] = { Cplex(i, 0), Cplex(-i, 0) };
+			result.setCol(c0, 0);
+			result.setCol(c1, 1);
+			//result.display();                    
+			return result; }
+		case Pauli::X: { Cplex c0[2] = { Cplex(0, 0), Cplex(1, 0) };
+					   Cplex c1[2] = { Cplex(1, 0), Cplex(0, 0) };
+					   result.setCol(c0, 0);
+					   result.setCol(c1, 1);
+					   //result.display();                    
+					   return result; }
+		case Pauli::Y: { Cplex c0[2] = { Cplex(0, 0), Cplex(0, -1) };
+					   Cplex c1[2] = { Cplex(0, 1), Cplex(0, 0) };
+					   result.setCol(c0, 0);
+					   result.setCol(c1, 1);
+					   //result.display();
+					   return result; }
+		case Pauli::Z: { Cplex c0[2] = { Cplex(1, 0), Cplex(0, 0) };
+					   Cplex c1[2] = { Cplex(0, 0), Cplex(-1, 0) };
+					   result.setCol(c0, 0);
+					   result.setCol(c1, 1);
+					   //result.display();
+					   return result; }
+			  default: { Cplex c0[2] = { Cplex(1, 0), Cplex(0, 0) };
+					   Cplex c1[2] = { Cplex(0, 0), Cplex(1, 0) };
+					   result.setCol(c0, 0);
+					   result.setCol(c1, 1);
+					   result.display();
+					   return result; }
+		}
+	}
 
 }
